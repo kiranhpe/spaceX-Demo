@@ -17,6 +17,8 @@
 
 .filter {
   background-color: #fff;
+}
+.filter div {
   text-align: center;
 }
 .avatar {
@@ -37,15 +39,17 @@
 }
 
 button {
-  background-color: #008cba; /* Green */
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 2px;
+  font-size: 10px;
+  margin: 10px;
+  margin-top: 3px;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 700px) {
@@ -54,6 +58,10 @@ button {
   }
   .main {
     grid-template-columns: 100%;
+  }
+
+  button {
+    padding: 16px 40px;
   }
 }
 
@@ -64,6 +72,9 @@ h2 {
 @media only screen and (max-width: 1024px) and (min-width: 700px) {
   .container {
     grid-template-columns: 50% 50%;
+  }
+  button {
+    padding: 5px 16px;
   }
 }
 
@@ -91,4 +102,8 @@ h2 {
   text-align: center;
   height: 20px;
   margin-top: 20px;
+}
+
+.active {
+  background-color: green;
 }

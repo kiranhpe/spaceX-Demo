@@ -1,5 +1,4 @@
 import { Component, OnInit, VERSION } from "@angular/core";
-import { SpaceX } from "./model/rocket";
 import { RocketService } from "./rocket.service";
 
 @Component({
@@ -12,48 +11,58 @@ export class AppComponent implements OnInit {
 
   name = "Kiran Nagaraj Reddy";
 
-  allRockets: SpaceX[] = [];
+  allRockets: any[] = [];
   loading = true;
 
-  year = null;
-
+  filterYear;
+  land = "";
+  launch = "";
   years = Array(16)
     .fill(1)
     .map((x, i) => i + 2006);
-  rockets: SpaceX[] = [];
+  rockets: any[] = [];
   ngOnInit() {
     this.getRockets();
   }
 
   filter(year: number) {
     this.loading = true;
-    this.year = year;
-    this.rockets = this.allRockets.filter(x => x.launch_year == this.year);
-    this.loading = false;
+    this.filterYear = year;
+    this.rocketService
+      .filter(this.launch, this.land, this.filterYear)
+      .subscribe((data: any[]) => {
+        this.rockets = data;
+        this.loading = false;
+      });
   }
-  filterLaunchLand(launch: boolean, land: boolean) {
+  filterLaunch(launch: boolean) {
     this.loading = true;
-    if (this.year == null) {
-      this.rocketService
-        .getLaunchAndLand(launch, land)
-        .subscribe((data: SpaceX[]) => {
-          this.rockets = data;
-          this.loading = false;
-        });
-    } else {
-      this.rocketService
-        .getLaunchAndLandWithYear(launch, land, this.year)
-        .subscribe((data: SpaceX[]) => {
-          this.rockets = data;
-          this.loading = false;
-        });
-    }
+    this.launch = launch.toString();
+    this.rocketService
+      .filter(this.launch, this.land, this.filterYear)
+      .subscribe((data: any[]) => {
+        this.rockets = data;
+        this.loading = false;
+      });
+  }
+
+  filterLand(land: boolean) {
+    this.loading = true;
+    this.land = land.toString();
+    this.rocketService
+      .filter(this.launch, this.land, this.filterYear)
+      .subscribe((data: any[]) => {
+        this.rockets = data;
+        this.loading = false;
+      });
   }
 
   getRockets() {
     this.loading = true;
-
-    this.rocketService.getRockets().subscribe((data: SpaceX[]) => {
+    this.filterYear = null;
+    this.land = "";
+    this.launch = "";
+    this.rocketService.getRockets().subscribe((data: any[]) => {
       this.allRockets = data;
       this.rockets = this.allRockets;
       this.loading = false;

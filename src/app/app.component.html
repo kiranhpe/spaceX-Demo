@@ -1,18 +1,22 @@
+<h3>SpaceX Launch Program</h3>
 <div class="main">
 	<div class="filter">
-		<p>Launch Year</p>
-		<hr>
-		<button *ngFor="let year of years" (click)="filter(year)">{{year}}</button>
-		<p>Successfull Launch</p>
-		<hr>
-		<button (click)="filterLaunchLand(true, true)">True</button>
-		<button (click)="filterLaunchLand(false,false)">False</button>
-		<p>Successfull Landing</p>
-		<hr>
-		<button (click)="filterLaunchLand(true, true)">True</button>
-		<button (click)="filterLaunchLand(true, false)">False</button>
-		<hr>
-		<button (click)="getRockets()">Clear Filter</button>
+		<strong style="margin:10px">Filters</strong>
+		<div>
+			<p>Launch Year</p>
+			<hr>
+			<button *ngFor="let year of years" (click)="filter(year)" [ngClass]="{'active': year==filterYear}">{{year}}</button>
+			<p>Successfull Launch</p>
+			<hr>
+			<button (click)="filterLaunch(true)" [ngClass]="{'active': launch=='true'}">True</button>
+			<button (click)="filterLaunch(false)" [ngClass]="{'active': launch=='false'}">False</button>
+			<p>Successfull Landing</p>
+			<hr>
+			<button (click)="filterLand(true)">True</button>
+			<button (click)="filterLand(false)">False</button>
+			<hr>
+			<button (click)="getRockets()">Clear Filter</button>
+		</div>
 	</div>
 	<div *ngIf="rockets.length ==0" class="no-content">No Launches are available</div>
 	<div class="container">

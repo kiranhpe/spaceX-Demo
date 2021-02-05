@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { SpaceX } from "./model/rocket";
 
 @Injectable()
 export class RocketService {
@@ -8,20 +7,11 @@ export class RocketService {
 
   readonly baseURL = "https://api.spacexdata.com/v3/launches?limit=100";
 
-  getRockets(filter?: string) {
-    return this.http.get<SpaceX[]>(this.baseURL + filter);
+  getRockets() {
+    return this.http.get(this.baseURL);
   }
-
-  getLaunchSuccess() {
-    return this.http.get(this.baseURL + "&launch_success=true");
-  }
-
-  getLaunchAndLand(launch: boolean, land: boolean) {
-    return this.http.get(
-      this.baseURL + "&launch_success=" + launch + "&land_success=" + land
-    );
-  }
-  getLaunchAndLandWithYear(launch: boolean, land: boolean, year: number) {
+  filter(launch: string, land: string, year: number) {
+    var yearFiler = year === null ? "" : year;
     return this.http.get(
       this.baseURL +
         "&launch_success=" +
@@ -29,7 +19,7 @@ export class RocketService {
         "&land_success=" +
         land +
         "&launch_year=" +
-        year
+        yearFiler
     );
   }
 }
