@@ -1,0 +1,9 @@
+/* Add application styles & imports to this file! */
+body {
+  background-color: #eeeee4;
+}
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
