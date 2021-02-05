@@ -17,6 +17,7 @@
 
 .filter {
   background-color: #fff;
+  height: 600px;
 }
 .filter div {
   text-align: center;
@@ -42,7 +43,7 @@ button {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 10px 32px;
+  padding: 5px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

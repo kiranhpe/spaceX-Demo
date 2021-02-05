@@ -12,8 +12,8 @@
 			<button (click)="filterLaunch(false)" [ngClass]="{'active': launch=='false'}">False</button>
 			<p>Successfull Landing</p>
 			<hr>
-			<button (click)="filterLand(true)">True</button>
-			<button (click)="filterLand(false)">False</button>
+			<button (click)="filterLand(true)" [ngClass]="{'active': land=='true'}">True</button>
+			<button (click)="filterLand(false)" [ngClass]="{'active': land=='false'}">False</button>
 			<hr>
 			<button (click)="getRockets()">Clear Filter</button>
 		</div>
