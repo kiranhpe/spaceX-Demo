@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { SpaceX } from "./model/rocket";
 
 @Injectable()
 export class RocketService {
@@ -7,8 +8,8 @@ export class RocketService {
 
   readonly baseURL = "https://api.spacexdata.com/v3/launches?limit=100";
 
-  getAllRockets() {
-    return this.http.get(this.baseURL);
+  getRockets(filter?: string) {
+    return this.http.get<SpaceX[]>(this.baseURL + filter);
   }
 
   getLaunchSuccess() {
