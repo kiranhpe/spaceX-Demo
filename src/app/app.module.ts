@@ -7,7 +7,7 @@ import { RocketService } from "./rocket.service";
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, FormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [RocketService]

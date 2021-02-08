@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   allRockets: any[] = [];
   loading = true;
-
+  search = "";
   filterYear;
   land = "";
   launch = "";
@@ -57,6 +57,10 @@ export class AppComponent implements OnInit {
       });
   }
 
+onKey(event:Event){
+  console.log("dd")
+  this.rockets = this.allRockets.filter(v => v.mission_name.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
+}
   getRockets() {
     this.loading = true;
     this.filterYear = null;

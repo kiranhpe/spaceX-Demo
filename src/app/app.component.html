@@ -2,6 +2,8 @@
 <div class="main">
 	<div class="filter">
 		<strong style="margin:10px">Filters</strong>
+    <br/>
+		<input [(ngModel)] = "search" (keyup)="onKey($event)"/> {{search}}
 		<div>
 			<p>Launch Year</p>
 			<hr>
