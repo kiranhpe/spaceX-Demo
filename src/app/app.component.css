@@ -108,3 +108,7 @@ h2 {
 .active {
   background-color: green;
 }
+
+input {
+  margin-left: 20px;
+}
