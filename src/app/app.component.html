@@ -30,7 +30,7 @@
 				</ul>
 				<p><strong>Launch Year : </strong>{{rocket.launch_year}}</p>
 				<p><strong>Successfull Launch : </strong>{{rocket.launch_success}}</p>
-				<p><strong>Successfull Landing : </strong><span *ngIf="rocket.land_success == null">Not Available</span>{{rocket.land_success}}
+				<p><strong>Successfull Landing : </strong><span *ngIf="rocket.rocket.first_stage.cores[0].land_success == null">Not Available</span>{{rocket.rocket.first_stage.cores[0].land_success}}
 				</p>
 			</div>
 		</div>
