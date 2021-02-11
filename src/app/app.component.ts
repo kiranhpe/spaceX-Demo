@@ -1,4 +1,5 @@
-import { Component, OnInit, VERSION } from "@angular/core";
+import { Component, OnDestroy, OnInit, VERSION } from "@angular/core";
+import { Subscription } from "rxjs";
 import { RocketService } from "./rocket.service";
 
 @Component({
@@ -6,14 +7,15 @@ import { RocketService } from "./rocket.service";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(private rocketService: RocketService) {}
 
   name = "Kiran Nagaraj Reddy";
 
   allRockets: any[] = [];
   loading = true;
-
+  rocketFilterSub: Subscription;
+  allRocketSub: Subscription;
   filterYear;
   land = "";
   launch = "";
@@ -38,7 +40,7 @@ export class AppComponent implements OnInit {
   filterLaunch(launch: boolean) {
     this.loading = true;
     this.launch = launch.toString();
-    this.rocketService
+    this.rocketFilterSub = this.rocketService
       .filter(this.launch, this.land, this.filterYear)
       .subscribe((data: any[]) => {
         this.rockets = data;
@@ -62,10 +64,17 @@ export class AppComponent implements OnInit {
     this.filterYear = null;
     this.land = "";
     this.launch = "";
-    this.rocketService.getRockets().subscribe((data: any[]) => {
-      this.allRockets = data;
-      this.rockets = this.allRockets;
-      this.loading = false;
-    });
+    this.allRocketSub = this.rocketService
+      .getRockets()
+      .subscribe((data: any[]) => {
+        this.allRockets = data;
+        this.rockets = this.allRockets;
+        this.loading = false;
+      });
+  }
+
+  ngOnDestroy() {
+    this.allRocketSub.unsubscribe();
+    this.rocketFilterSub.unsubscribe();
   }
 }
